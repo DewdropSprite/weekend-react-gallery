@@ -1,5 +1,10 @@
+import GalleryList from "../GalleryList/GalleryList";
+import React, {useEffect} from 'react';
+
 
 function App() {
+
+
     return (
       <div>
         <header>
@@ -8,6 +13,8 @@ function App() {
 
         <p>The gallery goes here!</p>
         <img src="images/goat_small.jpg"/>
+        
+        <GalleryList galleryListProp ={GalleryList}/>
       </div>
     );
 }
