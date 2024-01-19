@@ -4,49 +4,52 @@
 // Displays a gallery item's current number likes.
 // Contains a "like" button that, when clicked, will fire off a PUT /api/gallery/like/:id request.
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const GalleryItem = ({photo}) => {
+const GalleryItem = ({ photo }) => {
+    console.log("photo object in GalleryItem", photo)
+
     let [photoDescription, setPhotoDescription] = useState(false);
-    let [photoLikes, setPhotoLikes] = useState(photo.likes)
+    let [photoLikes, setPhotoLikes] = useState(0);
 
     const toggleDisplay = () => {
         setPhotoDescription(!photoDescription);
     }
-    
+
     const galleryLikes = () => {
         axios.put(`/api/gallery/like/${photo.id}`)
-         .then(() => {
-            setPhotoLikes(photoLikes +1);
-         })
-         .catch(error =>{
-            console.log("error", error)
-})
-
-let photoDescSwitch;
-
-if(photoDescription) {
-    photoDescSwitch = <td data-testid="description">{photo.description}</td>;
-}
-else{
-        photoDescSwitch = <td><img src={photo.url} style={{width: '500px'}} alt="Gallery Item"/></td>
+            .then(() => {
+                setPhotoLikes(photoLikes + 1);
+            })
+            .catch(error => {
+                console.log("error", error)
+            })
     }
+    // let photoDescSwitch;
 
-    return(
-        <div data-testid="galleryItem">
-            {photoDescSwitch}
+    // if(photoDescription) {
+    //     photoDescSwitch = <p data-testid="description">{photo.description}</p>;
+    // }
+    // else{
+    //         photoDescSwitch = <p><img src={photo.url} style={{width: '500px'}} alt="Gallery Item"/></p>
+    //     }
+    console.log("line 37", photo.url)
+    return (
+        <>
+            text
             <h3> Likes: {photoLikes}</h3>
-            <div>
-            <button data-testid="like" onClick = {galleryLikes} > Like </button>
-            <button data-testid="toggle" onClick = {toggleDisplay}>
+            <img src="images/goat_small.jpg"/>
+            <button data-testid="like" onClick={galleryLikes}> Like </button>
+            <button data-testid="toggle" onClick={toggleDisplay}>
                 {photoDescription ? 'Photo' : 'Description'}
             </button>
-            </div>
-        </div>
+
+        </>
     )
-  
-}}
+
+
+}
 
 
 

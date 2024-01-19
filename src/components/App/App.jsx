@@ -1,12 +1,12 @@
 import GalleryList from "../GalleryList/GalleryList";
-import React, {useEffect} from 'react';
+import React from 'react';
 
 
 function App() {
 
 
     return (
-      <div>
+      <div data-testid="app">
         <header>
           <h1>React Gallery</h1>
         </header>
@@ -14,7 +14,7 @@ function App() {
         <p>The gallery goes here!</p>
         <img src="images/goat_small.jpg"/>
         
-        <GalleryList galleryListProp ={GalleryList}/>
+        <GalleryList />
       </div>
     );
 }

@@ -6,9 +6,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GalleryItem from '../GalleryItem/GalleryItem';
 
-const GalleryList = ({photo}) => {
-    console.log("photo object", photo);
-   
+
+const GalleryList = () => {
+    console.log("inside gallery list");
+
     let [galleryList, setGalleryList] = useState([])
 
     const fetchGallery = () => {
@@ -17,10 +18,11 @@ const GalleryList = ({photo}) => {
             url: '/api/gallery'
         })
             .then((response) => {
-                console.log("Entire Response:", response);
-                console.log("Just the data:", response.data);
+                // console.log("Entire Response:", response);
+                // console.log("Just the data:", response.data);
 
-                setGalleryList(response.data);
+                setGalleryList(response?.data);
+
             })
             .catch(function (error) {
                 console.log("error on get", error)
@@ -29,22 +31,27 @@ const GalleryList = ({photo}) => {
 
     useEffect(() => {
         fetchGallery();
-    }, [])
+    }, []);
+
 
 
 
     // In its return statement, .maps through the array of gallery item objects that are stored in React state to display each gallery item.
     return (
-<table data-testid="galleryList">
-    <tbody>
-{galleryList.map((gallery) => (
-                    <tr key={gallery.id}>
-                        <GalleryItem photo={gallery}/>
-                    </tr>
-                ))}
-</tbody>
-</table>
-)}
+        <table data-testid="galleryList">
+            <tbody>
+                <tr>
+                {galleryList.map((gallery) => {
+                    console.log("gallery", gallery)
+                    return (
+                        <td key={gallery.id}><GalleryItem data-testid="galleryItem" key={gallery.id} photo={gallery} /></td>
+                    )
+                })}
+            </tr>
+            </tbody>
+        </table>
+    )
+}
 
 export default GalleryList;
 
