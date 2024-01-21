@@ -6,6 +6,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import './GalleryItem.css';
+
 
 const GalleryItem = ({ photo }) => {
     console.log("photo object in GalleryItem", photo)
@@ -24,28 +26,50 @@ const GalleryItem = ({ photo }) => {
             })
             .catch(error => {
                 console.log("error", error)
-            })}
+            })
+    }
 
     let photoDescSwitch;
 
     if (photoDescription) {
-        photoDescSwitch = <p data-testid="description">{photo.description}</p>;}
+        photoDescSwitch = (
+            <div>
+                <p data-testid="description">{photo.description}</p>
+            </div>
+
+        )
+    }
     else {
-        photoDescSwitch = <p><img src={photo.url} style={{ width: '100px' }} alt="Gallery Item" /></p>}
+        photoDescSwitch = (
+            <div>
+                <img src={photo.url} style={{ width: '300px', height: '200px' }} alt="Gallery Item" />
+            </div>
+        )
+    }
 
     return (
-        <>
-            <h3> Likes: {photoLikes}</h3>
-            {photoDescSwitch}
-            {/* <img src={photo.url} alt="Photo"/> */}
+        <div id="overall-gallery-item">
+            <div id='gallery-item'>
+                <h4>{photo.title}</h4>
+                <p>
+                    <button id="toggle" data-testid="toggle" onClick={toggleDisplay}>
+                        {photoDescription ? 'Show Photo' : 'Show Description'}
+                    </button>
+                </p>
+            </div>
+            <div>
+                {photoDescSwitch}
+            </div>
+            <div>
+                <button id="2" data-testid="like" onClick={galleryLikes}> Like </button>
+                {photoLikes}
+            </div>
+        </div>
 
-            <button data-testid="like" onClick={galleryLikes}> Like </button>
-            <button data-testid="toggle" onClick={toggleDisplay}>
-                {photoDescription ? 'Photo' : 'Description'}
-            </button>
-        </>
+
     )
 }
+
 
 
 
