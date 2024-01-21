@@ -24,31 +24,27 @@ const GalleryItem = ({ photo }) => {
             })
             .catch(error => {
                 console.log("error", error)
-            })
-    }
-    // let photoDescSwitch;
+            })}
 
-    // if(photoDescription) {
-    //     photoDescSwitch = <p data-testid="description">{photo.description}</p>;
-    // }
-    // else{
-    //         photoDescSwitch = <p><img src={photo.url} style={{width: '500px'}} alt="Gallery Item"/></p>
-    //     }
-    console.log("line 37", photo.url)
+    let photoDescSwitch;
+
+    if (photoDescription) {
+        photoDescSwitch = <p data-testid="description">{photo.description}</p>;}
+    else {
+        photoDescSwitch = <p><img src={photo.url} style={{ width: '100px' }} alt="Gallery Item" /></p>}
+
     return (
         <>
-            text
             <h3> Likes: {photoLikes}</h3>
-            <img src="images/goat_small.jpg"/>
+            {photoDescSwitch}
+            {/* <img src={photo.url} alt="Photo"/> */}
+
             <button data-testid="like" onClick={galleryLikes}> Like </button>
             <button data-testid="toggle" onClick={toggleDisplay}>
                 {photoDescription ? 'Photo' : 'Description'}
             </button>
-
         </>
     )
-
-
 }
 
 

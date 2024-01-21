@@ -38,20 +38,20 @@ const GalleryList = () => {
 
     // In its return statement, .maps through the array of gallery item objects that are stored in React state to display each gallery item.
     return (
-        <table data-testid="galleryList">
-            <tbody>
-                <tr>
+        <section data-testid="galleryList">
+    
+                <div>
                 {galleryList.map((gallery) => {
                     console.log("gallery", gallery)
                     return (
-                        <td key={gallery.id}><GalleryItem data-testid="galleryItem" key={gallery.id} photo={gallery} /></td>
+                        <p key={gallery.id}><GalleryItem data-testid="galleryItem" key={gallery.id} photo={gallery} /></p>
                     )
                 })}
-            </tr>
-            </tbody>
-        </table>
+            </div>
+        </section>
     )
 }
 
 export default GalleryList;
+
 
