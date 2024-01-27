@@ -7,13 +7,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './GalleryItem.css';
+import { useEffect } from 'react'
 
 
 const GalleryItem = ({ photo }) => {
     console.log("photo object in GalleryItem", photo)
 
     let [photoDescription, setPhotoDescription] = useState(false);
-    let [photoLikes, setPhotoLikes] = useState(0);
+    let [photoLikes, setPhotoLikes] = useState(photo.likes || 0);
 
     const toggleDisplay = () => {
         setPhotoDescription(!photoDescription);
@@ -29,6 +30,10 @@ const GalleryItem = ({ photo }) => {
             })
     }
 
+    useEffect(() => {
+        setPhotoLikes(photo.likes || 0)
+    }, [photo.likes])
+
     let photoDescSwitch;
 
     if (photoDescription) {
@@ -36,19 +41,18 @@ const GalleryItem = ({ photo }) => {
             <div>
                 <p data-testid="description">{photo.description}</p>
             </div>
-
         )
     }
     else {
         photoDescSwitch = (
-            <div>
+            <div >
                 <img src={photo.url} style={{ width: '300px', height: '200px' }} alt="Gallery Item" />
             </div>
         )
     }
 
     return (
-        <div id="overall-gallery-item">
+        <div data-testid="galleryItem" >
             <div id='gallery-item'>
                 <h4>{photo.title}</h4>
                 <p>
@@ -61,7 +65,7 @@ const GalleryItem = ({ photo }) => {
                 {photoDescSwitch}
             </div>
             <div>
-                <button id="2" data-testid="like" onClick={galleryLikes}> Like </button>
+                <button data-testid="like" onClick={galleryLikes}> Like </button>
                 {photoLikes}
             </div>
         </div>
